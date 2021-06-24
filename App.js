@@ -83,8 +83,8 @@ export default function App() {
   const [data, setData] = useState(RAList);
   const [maxNum, setMaxNum] = useState(maxNum);
 
-  const newElement(maxNum, brand, product) = () => {
-    let newElem = {num: (maxNum+1), brand: brand, product: product};
+  function newElement ( maxNum, brand, product ) {
+    let newElem = {num: maxNum, brand: brand, product: product}; // Maybe these need to be setMaxNum, setBrand, setProduct
     let newData = data.concat(newElem);
     setData(newData)
   }
