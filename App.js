@@ -1,8 +1,14 @@
+// Kevin R. Salger
+// IS 657, Summer 2021
+
+// https://github.com/Alikev42/IS657KRS.git
+// https://snack.expo.io/@alikev42/github.com-alikev42-is657krs
+
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { Text, TextInput, View, FlatList, Button } from 'react-native';
 import styles from "./Styles.js";
-import RAList from "./RAList.js";
+import RAList, { maxNum } from "./RAList.js"; 
 
 ///////////////
 // Functions //
@@ -20,11 +26,16 @@ function renderItem ( {item} ) {
   // Write new array element with maxNum+1, & Brand, Product from user
   // Update maxNum
   // Re-render the list on the display
-function addTask(brand, product) {
+function addTask({data}, brand, product) {
 //  const [brand, setBrand] = useState("");
 //  const [product, setProduct] = useState("");
+  const [maxNum, setMaxNum] = useState(maxNum);
+  const newElement = {num: {maxNum}, brand: brand, product: product}; 
+  // this.setState( {data: [...this.state.data, newElement]} );
 
-  return (
+  // findMax = {()=>setMaxNum(maxNum)};
+  return /*(
+    
     <View>
       <TextInput 
         style={styles.userInput}
@@ -32,7 +43,7 @@ function addTask(brand, product) {
         onChangeText={()=>setBrand(brand)}
         defaultValue={brand}>
       </TextInput>
-      
+       
       
       <TextInput 
         style={styles.userInput}
@@ -41,7 +52,7 @@ function addTask(brand, product) {
         defaultValue={product}> 
       </TextInput>
     </View>
-  );
+  );*/
 }
 
 // Click on a task to apply strikethrough text, indicating the task is finished
@@ -69,9 +80,18 @@ export default function App() {
   const [num, setNum] = useState(null);
   const [brand, setBrand] = useState(null);
   const [product, setProduct] = useState(null);
+  const [data, setData] = useState(RAList);
+  const [maxNum, setMaxNum] = useState(maxNum);
+
+  const newElement(maxNum, brand, product) = () => {
+    let newElem = {num: (maxNum+1), brand: brand, product: product};
+    let newData = data.concat(newElem);
+    setData(newData)
+  }
 
   return (
     <View style={styles.container}>
+
 
       <View style={styles.headerBox}>
         <Text style={styles.headerText}>
@@ -79,18 +99,21 @@ export default function App() {
         </Text>
       </View>
 
+
       <View style={styles.colTopLine}>
         RA # | Brand | Product
       </View>
 
+
       <View>
         <FlatList 
-          data={RAList}
+          data={data}
           renderItem={renderItem}
           keyExtractor={taskList => taskList.num}
         />
       </View>
       
+
       <View style={styles.actionBox}>
         <TextInput 
           style={styles.userInput}
@@ -107,11 +130,12 @@ export default function App() {
         </TextInput>
 
         <Button
-          onPress={addTask(brand, product)}
+          onPress={newElement(maxNum, brand, product)}
           title="Add Task"
           color="#994466"
         />
       </View>  
+
 
       <View style={styles.actionBox}>
         <TextInput 
@@ -127,8 +151,12 @@ export default function App() {
           color="#994466" 
         />
       </View>
-      
+
+
       <StatusBar style="auto" />
     </View>
   );
 }
+// newElement = {maxNum, brand, product}}
+//        this.setData( {data: [...this.state.data, {maxNum, brand, product}]} );
+//onPress={addTask({data}, brand, product)}}

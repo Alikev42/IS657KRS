@@ -18,5 +18,8 @@ let RAList = [
     {num: 4915, brand: "Studio Projects", product: "CS5" },
     {num: 4916, brand: "Trident", product: "A-Range EQ 500" },
 ];
-
 export default RAList;
+
+
+let maxNum = 4916;
+export {maxNum};
