@@ -26,7 +26,7 @@ export default StyleSheet.create( {
       alignItems: "center",
       justifyContent: "center", 
       margin: 20,
-      borderWidth: 3,
+      borderWidth: 5,
       borderColor: "#000000",
       borderStyle: "solid"
     },
@@ -48,14 +48,43 @@ export default StyleSheet.create( {
     actionBox: {
         flexDirection: "column",
         alignItems: "space-between",
-        borderWidth: 1,
+        borderWidth: 3,
         borderColor: "#000000",
-        borderStyle: "solid"
+        borderStyle: "solid",
+        margin: 7
+    },
+
+    actionRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around"
     },
 
     userInput: {
-        fontStyle: "italic"
+        backgroundColor: "#efefef",
+        fontStyle: "italic",
+        fontSize: 20
     },
+
+    item: {
+        textColor: "#ff0000",
+        backgroundColor: "#ffffff"
+    },
+
+    text: {
+        color: "#00ff00"
+    }
+/*
+    yetToDo: {
+        fontStyle: ""
+    },
+
+    finToDo: {
+        textDecorationLine: "line-through",
+        textDecorationStyle: "solid"
+    },
+*/
+
 
     /*
     separator: {
