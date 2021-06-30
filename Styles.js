@@ -4,7 +4,6 @@ export default StyleSheet.create( {
     container: {
         flex: 1, 
         flexDirection: "column",
-        // flexWrap: "wrap",
         backgroundColor: "#dddddd",
         alignItems: "center",
         justifyContent: "flex-start",
@@ -38,7 +37,6 @@ export default StyleSheet.create( {
     },
 
     colTopLine: {
-        //justifyContent: "flex-start",
         alignItems: "flex-start",
         fontWeight: "bold",
         textDecorationLine: "underline",
@@ -67,30 +65,16 @@ export default StyleSheet.create( {
     },
 
     item: {
-        textColor: "#ff0000",
+        textColor: "#000000",
         backgroundColor: "#ffffff"
     },
 
     text: {
-        color: "#00ff00"
-    }
-/*
-    yetToDo: {
-        fontStyle: ""
+        color: "#000000"
     },
 
-    finToDo: {
-        textDecorationLine: "line-through",
-        textDecorationStyle: "solid"
-    },
-*/
-
-
-    /*
-    separator: {
-        marginVertical: 8,
-        borderBottomColor: "#737373",
-        borderBottomWidth: 12
+    checkList: {
+        flexDirection: "row"
     }
-    */
+
 });

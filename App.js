@@ -6,15 +6,12 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { Text, TextInput, View, FlatList, Button, TouchableOpacity } from 'react-native';
+import { Text, TextInput, View, FlatList, 
+         Button, TouchableOpacity, CheckBox } from 'react-native';
 import styles from "./Styles.js";
 import RAList from "./RAList.js"; 
 
-const Item = ( {item, onPress, backgroundColor, textColor} ) => (
-              <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-                <Text style={[styles.text, textColor]}>{`${item.num}  |  ${item.brand} ${item.product}`}</Text>
-              </TouchableOpacity>
-            )
+
 
 
 ///////////////
@@ -28,37 +25,52 @@ export default function App() {
   const [RAnum, setRAnum] = useState(null);
   const [brand, setBrand] = useState(null);
   const [product, setProduct] = useState(null);
-  const [data, setData] = useState(RAList);  // Sets initial value of data array
+  const [done, setDone] = useState(false);
+  const [data, setData] = useState(RAList);
   const [selectedItem, setSelItem] = useState(null);
+  //const [isSelected, setSelection] = useState(false);
 
   function renderItem ( {item} ) {
-    const bkgdColor = item === selectedItem ? "#000000" : "#dddddd";
+    const backgroundColor = item === selectedItem ? "#111111" : "#eeeeee"; 
     const color = item === selectedItem ? "#686868" : "#000000";
+    
+    const Item = ( {item, onPress, backgroundColor, textColor} ) => (
+      //const [isSelected, setSelection] = useState(false);        
+                <View style={styles.checkList}> 
+                  {/* <CheckBox value={isSelected}
+                            onValueChange={setSelection}
+                            style={styles.checkbox}>  
+                  </CheckBox> */}
+                  <CheckBox></CheckBox>
+                  
+                  <TouchableOpacity onPress={onPress} 
+                                    style={[styles.item, backgroundColor]}> 
+                    <Text style={[styles.text, textColor]}>
+                      {`${item.num}  |  ${item.brand} ${item.product}`}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                );
+
     return (
-    <Item item={item} 
-          onPress={()=>setSelItem(item)}
-          backgroundColor={ {bkgdColor} }
-          textColor={ {color} } />
+      <Item item={item} 
+            onPress={ ()=>{setSelItem(item)} }
+            backgroundColor={ {backgroundColor} }
+            textColor={ {color} } 
+      />
     )
-  };  /*  The term "item" is required as the receiving argument. It cannot be
-          any other word.  How stupid.  A programmer cannot then use terms 
-          that make sense to the program.  */
+  }; 
 
 
   // Click ADD TASK button to add a new task
-  function addTask ( maxNum, brand, product ) {
-    let newElem = {num: maxNum, brand: brand, product: product};
+  function addTask ( repairNum, brand, product ) {
+    let newElem = {num: repairNum, brand: brand, product: product};
     let newData = data.concat([newElem]);
     setData(newData);
     return
-    //  Would also like to restore the textInput fields, 
   }
 
-  // Not sure clearFields is needed
-  function clearFields() {
-    return
-  }
-  
+ 
   return (
     <View style={styles.container}>
 
@@ -90,21 +102,21 @@ export default function App() {
           style={styles.userInput}
           placeholder="RA#:"
           onChangeText={(repairNum)=>setRAnum(repairNum)}
-          defaultValue={RAnum}>
+          value={RAnum}>
         </TextInput>
 
         <TextInput 
           style={styles.userInput}
           placeholder="Brand:"
           onChangeText={(repairBrand)=>setBrand(repairBrand)}
-          defaultValue={brand}>
+          value={brand}>
         </TextInput>
       
         <TextInput 
           style={styles.userInput}
           placeholder="Product:"
           onChangeText={(repairProd)=>setProduct(repairProd)} 
-          defaultValue={product}> 
+          value={product}> 
         </TextInput>
 
         <View style={styles.actionRow}>
@@ -112,18 +124,9 @@ export default function App() {
             onPress={()=>addTask(RAnum, brand, product)}
             title="Add Task"
             color="#994466"
-
-          />
-          <Button
-            onPress={()=>clearFields()}
-            title="Clear Fields"
-            color="#994466"
           />
         </View>
       </View>  
-
-
-
 
       <StatusBar style="auto" />
     </View>
